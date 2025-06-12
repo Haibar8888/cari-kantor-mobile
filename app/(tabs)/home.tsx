@@ -1,5 +1,5 @@
 import { Gs } from "@/assets/styles/GlobalStyle";
-import InputText from "@/src/components/inputText";
+import InputText from "@/components/inputText";
 
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
