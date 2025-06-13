@@ -11,7 +11,7 @@ export default function Index() {
         <View
           style={{
             flexDirection: "row",
-            alignContent: "center",
+            alignItems: "center",
             justifyContent: "center",
           }}
         >
@@ -103,35 +103,42 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 30,
   },
+
   profileContainer: {
     marginRight: 10,
     width: 50,
     height: 50,
   },
-  profileDetail: {
+
+  fileDetail: {
     flexDirection: "column",
     justifyContent: "center",
   },
+
   sectionContainer:{
     paddingHorizontal: 24,
   },
+
   sectionTitle:{
     ...Gs.textBlack,
     marginBottom: 12,
     
   },
+
   popularImageMain:{
     ...Gs.cornerXL,
     flex: 1,
     height: 150,
     marginRight: 10,
   },
+
   popularImage:{
     ...Gs.cornerMD,
     width: 110,
     height: 70,
     marginBottom: 10
   },
+  profileDetail: {},
   popularPrice: {
       ...Gs.cornerSM,
       ...Gs.justifyCenter,
@@ -141,6 +148,7 @@ const styles = StyleSheet.create({
       borderRadius: 12,
       backgroundColor: colors.secondary
   },
+
   popularLabel: {
       ...Gs.font600,
       ...Gs.textPrimary,
