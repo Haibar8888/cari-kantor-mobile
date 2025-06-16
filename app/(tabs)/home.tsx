@@ -2,9 +2,31 @@ import { colors } from "@/assets/styles/Colors";
 import { Gs } from "@/assets/styles/GlobalStyle";
 import InputText from "@/components/inputText";
 
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function Index() {
+  const dataNewsWorty = [
+    {
+      title: "deepwork",
+      address: "pantai utara no. 98",
+      price: "$12/day",
+      image: require("../../assets/images/item_2_a.png"),
+    },
+    {
+      title: "hajime",
+      address: "pantai utara no. 99",
+      price: "$15/day",
+      image: require("../../assets/images/item_2_b.png"),
+    },
+  ];
+
   const renderHeader = () => {
     return (
       <View style={styles.headerContainer}>
@@ -54,28 +76,56 @@ export default function Index() {
 
   const renderPopularSection = () => {
     return (
-           <View style={styles.sectionContainer}>
-              <Text style={[styles.sectionTitle, Gs.h1]}>Popular</Text>
-              <View style={Gs.flexRow}>
-                <Image source={require('../../assets/images/item_1_a.png')} style={styles.popularImageMain}></Image>
-                <View>
-                  <Image source={require('../../assets/images/item_1_b.png')} style={styles.popularImage}></Image>
-                  <Image source={require('../../assets/images/item_1_c.png')} style={styles.popularImage} ></Image>
-                </View>
-              </View>
-             
-              <View style={{flexDirection: "row", justifyContent:"space-between", alignItems:"center"}}>
-                  <View>
-                    <Text style={[Gs.h2,Gs.textBlack]}>Indoor Work</Text>
-                    <Text style={[Gs.textGrey]}>Jalan Galuh bekerja no.7</Text>
-                  </View>
-                  <View style={[styles.popularPrice, Gs.cornerMD]}>
-                    <Text style={[styles.popularLabel, Gs.cornerMD]}>$500/day</Text>
-                  </View>
-              </View>
+      <View style={styles.sectionContainer}>
+        <Text style={[styles.sectionTitle, Gs.h1]}>Popular</Text>
+        <View style={Gs.flexRow}>
+          <Image
+            source={require("../../assets/images/item_1_a.png")}
+            style={styles.popularImageMain}
+          ></Image>
+          <View>
+            <Image
+              source={require("../../assets/images/item_1_b.png")}
+              style={styles.popularImage}
+            ></Image>
+            <Image
+              source={require("../../assets/images/item_1_c.png")}
+              style={styles.popularImage}
+            ></Image>
           </View>
-    )
-  }
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <Text style={[Gs.h2, Gs.textBlack]}>Indoor Work</Text>
+            <Text style={[Gs.textGrey]}>Jalan Galuh bekerja no.7</Text>
+          </View>
+          <View style={[styles.popularPrice, Gs.cornerMD]}>
+            <Text style={[styles.popularLabel, Gs.cornerMD]}>$500/day</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const renderNewWorthy = () => {
+    return (
+      <View style={styles.newsWorthySection}>
+        <View>
+          <Text style={styles.newsWorthy}>Newsworthy</Text>
+        </View>
+        <View>
+          <FlatList data={dataNewsWorty: any} />
+        </View>
+      </View>
+    );
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -83,7 +133,7 @@ export default function Index() {
       {renderSearchBar()}
       <ScrollView>
         {renderPopularSection()}
-        {/* {renderNewWorthy()} */}
+        {renderNewWorthy()}
       </ScrollView>
     </View>
   );
@@ -115,42 +165,50 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  sectionContainer:{
+  sectionContainer: {
     paddingHorizontal: 24,
   },
 
-  sectionTitle:{
+  sectionTitle: {
     ...Gs.textBlack,
     marginBottom: 12,
-    
   },
 
-  popularImageMain:{
+  popularImageMain: {
     ...Gs.cornerXL,
     flex: 1,
     height: 150,
     marginRight: 10,
   },
 
-  popularImage:{
+  popularImage: {
     ...Gs.cornerMD,
     width: 110,
     height: 70,
-    marginBottom: 10
+    marginBottom: 10,
   },
   profileDetail: {},
   popularPrice: {
-      ...Gs.cornerSM,
-      ...Gs.justifyCenter,
-      ...Gs.itemsCenter,
-      paddingHorizontal: 12,
-      paddingVertical: 8,
-      borderRadius: 12,
-      backgroundColor: colors.secondary
+    ...Gs.cornerSM,
+    ...Gs.justifyCenter,
+    ...Gs.itemsCenter,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 12,
+    backgroundColor: colors.secondary,
   },
 
   popularLabel: {
-      ...Gs.font600,
-      ...Gs.textPrimary,
-  }
+    ...Gs.font600,
+    ...Gs.textPrimary,
+  },
+  newsWorthySection: {
+    paddingHorizontal: 24,
+    paddingVertical: 30,
+  },
+
+  newsWorthy: {
+    ...Gs.font700,
+    fontSize: 22,
+  },
 });
