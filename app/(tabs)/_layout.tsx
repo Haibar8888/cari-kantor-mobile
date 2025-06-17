@@ -1,10 +1,12 @@
-import { Tabs } from 'expo-router';
+import BottomNav from "@/components/bottomNav";
+import { Slot } from "expo-router";
+import { View } from "react-native";
 
-export default function RootLayout() {
+export default function Layout() {
   return (
-    <Tabs initialRouteName='home' screenOptions={{headerShown : false}}>
-      <Tabs.Screen name="home" options={{ title: 'Home' }} />
-      <Tabs.Screen name="booking" options={{ title: 'Booking' }} />
-    </Tabs>
-  ) 
+    <View style={{ flex: 1 }}>
+      <Slot />
+      <BottomNav />
+    </View>
+  );
 }
