@@ -1,45 +1,73 @@
 import { colors } from "@/assets/styles/Colors";
 import { Gs } from "@/assets/styles/GlobalStyle";
 import InputText from "@/components/inputText";
+import NewsWorthyItem from "@/components/newWortyItem";
+import { useNavigation } from "expo-router";
 
 import {
   FlatList,
   Image,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 
+// Pindahkan interface ke luar komponen
+interface INewsWorthyItem {
+  title: string;
+  address: string;
+  price: string;
+  image: any; // bisa diganti `ImageSourcePropType`
+}
+
 export default function Index() {
-  const dataNewsWorty = [
+  const dataNewsWorthy: INewsWorthyItem[] = [
     {
-      title: "deepwork",
+      title: "Deepwork",
       address: "pantai utara no. 98",
       price: "$12/day",
       image: require("../../assets/images/item_2_a.png"),
     },
     {
-      title: "hajime",
+      title: "Hajime",
+      address: "pantai utara no. 99",
+      price: "$15/day",
+      image: require("../../assets/images/item_2_b.png"),
+    },
+    {
+      title: "Hajime1",
+      address: "pantai utara no. 99",
+      price: "$15/day",
+      image: require("../../assets/images/item_2_b.png"),
+    },
+    {
+      title: "Hajime2",
+      address: "pantai utara no. 99",
+      price: "$15/day",
+      image: require("../../assets/images/item_2_b.png"),
+    },
+    {
+      title: "Hajime3",
       address: "pantai utara no. 99",
       price: "$15/day",
       image: require("../../assets/images/item_2_b.png"),
     },
   ];
 
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate("details");
+  };
+
   const renderHeader = () => {
     return (
       <View style={styles.headerContainer}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image
             source={require("../../assets/images/profile_1.png")}
-            alt=""
             style={styles.profileContainer}
           />
           <View style={styles.profileDetail}>
@@ -50,11 +78,11 @@ export default function Index() {
         <View style={{ flexDirection: "row", gap: 10 }}>
           <Image
             source={require("../../assets/icons/gift.png")}
-            style={{ width: 24 }}
+            style={{ width: 24, height: 24 }}
           />
           <Image
             source={require("../../assets/icons/notification.png")}
-            style={{ width: 24 }}
+            style={{ width: 24, height: 24 }}
           />
         </View>
       </View>
@@ -82,16 +110,16 @@ export default function Index() {
           <Image
             source={require("../../assets/images/item_1_a.png")}
             style={styles.popularImageMain}
-          ></Image>
+          />
           <View>
             <Image
               source={require("../../assets/images/item_1_b.png")}
               style={styles.popularImage}
-            ></Image>
+            />
             <Image
               source={require("../../assets/images/item_1_c.png")}
               style={styles.popularImage}
-            ></Image>
+            />
           </View>
         </View>
 
@@ -117,35 +145,39 @@ export default function Index() {
   const renderNewWorthy = () => {
     return (
       <View style={styles.newsWorthySection}>
-        <View>
-          <Text style={styles.newsWorthy}>Newsworthy</Text>
-        </View>
-        <View>
-          <FlatList data={dataNewsWorty: any} />
-        </View>
+        <Text style={styles.newsWorthy}>Newsworthy</Text>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={dataNewsWorthy}
+          keyExtractor={(item) => item.title}
+          renderItem={({ item }) => (
+            <NewsWorthyItem
+              title={item.title}
+              address={item.address}
+              price={item.price}
+              image={item.image}
+              onPress={handlePress}
+            />
+          )}
+        />
       </View>
     );
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       {renderHeader()}
       {renderSearchBar()}
-      <ScrollView>
+      <ScrollView style={styles.scrollContainer}>
         {renderPopularSection()}
         {renderNewWorthy()}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   backgroundColor: colors.white,
-  // },
   headerContainer: {
     ...Gs.flexRow,
     ...Gs.itemsCenter,
@@ -160,7 +192,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
 
-  fileDetail: {
+  profileDetail: {
     flexDirection: "column",
     justifyContent: "center",
   },
@@ -187,7 +219,7 @@ const styles = StyleSheet.create({
     height: 70,
     marginBottom: 10,
   },
-  profileDetail: {},
+
   popularPrice: {
     ...Gs.cornerSM,
     ...Gs.justifyCenter,
@@ -202,6 +234,7 @@ const styles = StyleSheet.create({
     ...Gs.font600,
     ...Gs.textPrimary,
   },
+
   newsWorthySection: {
     paddingHorizontal: 24,
     paddingVertical: 30,
@@ -210,5 +243,10 @@ const styles = StyleSheet.create({
   newsWorthy: {
     ...Gs.font700,
     fontSize: 22,
+    marginBottom: 16,
+  },
+
+  scrollContainer: {
+    height: "100%",
   },
 });
