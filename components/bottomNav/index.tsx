@@ -16,7 +16,7 @@ export default function CustomBottomNav() {
     },
     {
       name: "Messages",
-      path: "/booking",
+      path: "/",
       icon: require("../../assets/icons/messages.png"),
     },
     {

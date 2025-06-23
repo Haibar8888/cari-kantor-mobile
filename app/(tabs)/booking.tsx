@@ -1,15 +1,14 @@
-import { Text, View } from "react-native";
+import Header from "@/components/header";
+import { View } from "react-native";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Booking</Text>
+    <View>
+      <Header
+        title="Booking"
+        subtitle="Space available for today"
+        showRightButton={false}
+      />
     </View>
   );
 }

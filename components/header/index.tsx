@@ -21,7 +21,9 @@ function Details({ title, subtitle, showRightButton = true }: DetailsProps) {
         </TouchableOpacity>
       </View>
       <View style={styles.textHeader}>
-        <Text style={{ fontSize: 22, fontWeight: 700 }}>{title}</Text>
+        <Text style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>
+          {title}
+        </Text>
         <Text style={{ color: "#878787", fontSize: 14, fontWeight: 400 }}>
           {subtitle}
         </Text>
