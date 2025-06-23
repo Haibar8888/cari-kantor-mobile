@@ -2,7 +2,9 @@ import { colors } from "@/assets/styles/Colors";
 import { Gs } from "@/assets/styles/GlobalStyle";
 import InputText from "@/components/inputText";
 import NewsWorthyItem from "@/components/newWortyItem";
+import NotificationModal from "@/components/notificationModal";
 import { useNavigation } from "expo-router";
+import React, { useState } from "react";
 
 import {
   FlatList,
@@ -11,6 +13,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -56,6 +59,8 @@ export default function Index() {
     },
   ];
 
+  const [visible, setVisible] = useState(false);
+
   const navigation = useNavigation();
 
   const handlePress = () => {
@@ -80,9 +85,18 @@ export default function Index() {
             source={require("../../assets/icons/gift.png")}
             style={{ width: 24, height: 24 }}
           />
-          <Image
-            source={require("../../assets/icons/notification.png")}
-            style={{ width: 24, height: 24 }}
+          <TouchableOpacity onPress={() => setVisible(true)}>
+            <Image
+              source={require("../../assets/icons/notification.png")}
+              style={{ width: 24, height: 24 }}
+            />
+          </TouchableOpacity>
+          <NotificationModal
+            visible={visible}
+            title="Pesan Baru"
+            message="Anda memiliki 1 pesan yang belum dibaca."
+            icon={require("@/assets/icons/notification.png")}
+            onClose={() => setVisible(false)}
           />
         </View>
       </View>
